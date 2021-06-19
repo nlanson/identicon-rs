@@ -96,7 +96,7 @@ mod Identicon {
             let resized = image::imageops::resize(&imgbuf, 128, 128, image::imageops::FilterType::Nearest);
 
             //Save the  resized image
-            resized.save("./identicolour.png").unwrap();
+            resized.save("./identicon.png").unwrap();
         }
     }
 }
