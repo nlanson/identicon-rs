@@ -70,7 +70,7 @@ mod Identicon {
             ];
         }
 
-        pub fn render(&self) {
+        pub fn render(&self, fileName: &str) {
             //Define image dimensions
             let imgx = 5;
             let imgy = 5;
@@ -96,7 +96,7 @@ mod Identicon {
             let resized = image::imageops::resize(&imgbuf, 128, 128, image::imageops::FilterType::Nearest);
 
             //Save the  resized image
-            resized.save("./identicon.png").unwrap();
+            resized.save(format!("./{}.png", fileName)).unwrap();
         }
     }
 }
@@ -104,7 +104,7 @@ mod Identicon {
 
 
 fn main() {
-    let input: String = String::from("Vevo123");
+    let input: String = String::from("TestInput123");
     let identicon: Identicon::Identicon = Identicon::Identicon::new(input);
-    identicon.render();
+    identicon.render("identicon");
 }
