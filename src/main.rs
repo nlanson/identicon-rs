@@ -15,14 +15,6 @@ mod Identicon {
             let hash: [u8; 16] = Identicon::crypt(input);
             let rgb: [u8; 3] = Identicon::extractIntsFromHash(&hash);
             let grid: [bool; 25] = Identicon::createGrid(&hash);
-
-            //Display grid for debugging purposes.
-            // println!("Grid:");
-            // println!("{},{},{},{},{}", grid[0], grid[1], grid[2], grid[3], grid[4]);
-            // println!("{},{},{},{},{}", grid[5], grid[6], grid[7], grid[8], grid[9]);
-            // println!("{},{},{},{},{}", grid[10], grid[11], grid[12], grid[13], grid[14]);
-            // println!("{},{},{},{},{}", grid[15], grid[16], grid[17], grid[18], grid[19]);
-            // println!("{},{},{},{},{}", grid[20], grid[21], grid[22], grid[23], grid[24]);
             
             return Identicon {
                 input: input_clone,
@@ -86,8 +78,6 @@ mod Identicon {
                 //Mirror
                 grid[m+4] = grid[m];
                 grid[m+3] = grid[m+1];
-                //println!("{}, {}, {}, {}, {}", (hash[i] % 2) == 0, (hash[i+1] % 2) == 0, (hash[i+2] % 2) == 0, (hash[i+1] % 2) == 0, (hash[i] % 2) == 0);
-                println!("{}, {}, {}, {}, {}", m, m+1, m+2, m+3, m+4);
 
                 //If i equals 12 and the repeat counter equals 0 then exit the loop.
                 if i == 12 {
@@ -136,7 +126,7 @@ mod Identicon {
 
 
 fn main() {
-    let input: String = String::from("nlanson");
+    let input: String = String::from("Zilleyy");
     let identicon: Identicon::Identicon = Identicon::Identicon::new(input);
     identicon.render("identicon");
 }
