@@ -1,6 +1,5 @@
-//! An example of generating julia fractals.
 extern crate image;
-extern crate num_complex;
+//extern crate num_complex;
 
 use image::{imageops};
 
@@ -59,15 +58,18 @@ mod Identicon {
             let mut grid: [bool; 25] = [true; 25];
             
             //Impl algorithm to create grid here.
-            
-            //Return alternating grid for testing purposes.
-            return [
-                true, false, true, false, true, 
-                false, true, false, true, false, 
-                true, false, true, false, true, 
-                false, true, false, true, false, 
-                true, false, true, false, true
-            ];
+
+            let mut i: usize = 0;
+            while i < 25 {
+                if i % 2 == 0 {
+                    grid[i] = true;
+                } else {
+                    grid[i] = false;
+                }
+                i += 1;
+            }
+
+            grid
         }
 
         pub fn render(&self, fileName: &str) {
@@ -104,7 +106,7 @@ mod Identicon {
 
 
 fn main() {
-    let input: String = String::from("TestInput123");
+    let input: String = String::from("nlanson");
     let identicon: Identicon::Identicon = Identicon::Identicon::new(input);
     identicon.render("identicon");
 }
