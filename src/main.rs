@@ -1,7 +1,5 @@
+#![allow(non_snake_case)]
 extern crate image;
-//extern crate num_complex;
-
-use image::{imageops};
 
 mod Identicon {
     pub struct Identicon {
@@ -57,16 +55,48 @@ mod Identicon {
         fn createGrid(hash: &[u8; 16]) -> [bool; 25] {
             let mut grid: [bool; 25] = [true; 25];
             
-            //Impl algorithm to create grid here.
-
             let mut i: usize = 0;
-            while i < 25 {
-                if i % 2 == 0 {
-                    grid[i] = true;
+            let mut m: usize = 0;
+            while i < hash.len() {
+                
+
+                //Edge
+                if (hash[i] % 2) == 0 {
+                    grid[m] = true;
                 } else {
-                    grid[i] = false;
+                    grid[m] = false;
                 }
-                i += 1;
+                
+
+                //Aisle
+                if (hash[i+1] % 2) == 0 {
+                    grid[m+1] = true;
+                } else {
+                    grid[m+1] = false;
+                }
+                
+
+                //Centre
+                if (hash[i+2] % 2) == 0 {
+                    grid[m+2] = true;
+                } else {
+                    grid[m+2] = false;
+                }
+
+                //Mirror
+                grid[m+4] = grid[m];
+                grid[m+3] = grid[m+1];
+                //println!("{}, {}, {}, {}, {}", (hash[i] % 2) == 0, (hash[i+1] % 2) == 0, (hash[i+2] % 2) == 0, (hash[i+1] % 2) == 0, (hash[i] % 2) == 0);
+                println!("{}, {}, {}, {}, {}", m, m+1, m+2, m+3, m+4);
+
+                //If i equals 12 and the repeat counter equals 0 then exit the loop.
+                if i == 12 {
+                    break;
+                }
+
+                //Increment counters
+                m += 5;
+                i += 3;
             }
 
             grid
