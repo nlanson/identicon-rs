@@ -126,7 +126,7 @@ mod Identicon {
 
 
 fn main() {
-    let input: String = String::from("Zilleyy");
+    let input: String = String::from("NozzaVevo");
     let identicon: Identicon::Identicon = Identicon::Identicon::new(input);
     identicon.render("identicon");
 }
