@@ -1,7 +1,6 @@
 #![allow(non_snake_case)]
-extern crate image;
-use std::io;
-use std::io::*;
+use image;
+use text_io;
 
 pub mod Identicon {
     pub struct Identicon {
@@ -12,8 +11,9 @@ pub mod Identicon {
     }
 
     impl Identicon {
+        //Create a new identicon from an inputted String and return it.
         pub fn new(input: String) -> Identicon {
-            let input_clone: String = input.clone();  //Clone input to own input here and be able to copy it.
+            let input_clone: String = input.clone();     //Clone input to own input here and be able to copy it.
             let hash: [u8; 16] = Identicon::crypt(input);
             let rgb: [u8; 3] = Identicon::extractIntsFromHash(&hash);
             let grid: [bool; 25] = Identicon::createGrid(&hash);
@@ -26,6 +26,15 @@ pub mod Identicon {
             }
         }
 
+        //Create a new identicon using user input.
+        pub fn new_readln() -> Identicon {
+            println!("Enter input:");
+            let input: String = text_io::read!();
+            let identicon: Identicon = Identicon::new(input);
+            identicon
+        }
+
+        //Encrypt a string with MD5 and return a hash array.
         fn crypt(input: String) -> [u8; 16] {
             //Hash input.
             let hash: md5::Digest = md5::compute(input);
@@ -41,11 +50,13 @@ pub mod Identicon {
             retArray
         }
 
+        //Extract ints from an MD5::Digest hash array to select RGB values.
         fn extractIntsFromHash(hash: &[u8; 16]) -> [u8; 3] {
             //Extract first 3 values from md5 digest and use as RGB colour.
             [hash[0], hash[1], hash[2]]
         }
 
+        //Create the grid to render
         fn createGrid(hash: &[u8; 16]) -> [bool; 25] {
             let mut grid: [bool; 25] = [true; 25];
             
@@ -94,6 +105,7 @@ pub mod Identicon {
             grid
         }
 
+        //Render the grid
         pub fn render(&self, fileName: &str) {
             //Define image dimensions
             let imgx = 5;
