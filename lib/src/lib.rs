@@ -1,7 +1,9 @@
 #![allow(non_snake_case)]
 extern crate image;
+use std::io;
+use std::io::*;
 
-mod Identicon {
+pub mod Identicon {
     pub struct Identicon {
         pub input: String,
         pub hash: [u8; 16],
@@ -118,15 +120,7 @@ mod Identicon {
             let resized = image::imageops::resize(&imgbuf, 128, 128, image::imageops::FilterType::Nearest);
 
             //Save the  resized image
-            resized.save(format!("./{}.png", fileName)).unwrap();
+            resized.save(format!("{}.png", fileName)).unwrap();
         }
     }
-}
-
-
-
-fn main() {
-    let input: String = String::from("NozzaVevo");
-    let identicon: Identicon::Identicon = Identicon::Identicon::new(input);
-    identicon.render("identicon");
 }

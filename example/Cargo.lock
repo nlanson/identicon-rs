@@ -139,6 +139,21 @@ dependencies = [
 ]
 
 [[package]]
+name = "identicon-rs"
+version = "0.1.0"
+dependencies = [
+ "image",
+ "md5",
+]
+
+[[package]]
+name = "identicon-rs-example"
+version = "0.1.0"
+dependencies = [
+ "identicon-rs",
+]
+
+[[package]]
 name = "image"
 version = "0.23.14"
 source = "registry+https://github.com/rust-lang/crates.io-index"
@@ -155,14 +170,6 @@ dependencies = [
  "png",
  "scoped_threadpool",
  "tiff",
-]
-
-[[package]]
-name = "img"
-version = "0.1.0"
-dependencies = [
- "image",
- "md5",
 ]
 
 [[package]]
