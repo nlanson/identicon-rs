@@ -29,8 +29,7 @@ pub mod Identicon {
         //Create a new identicon using user input.
         pub fn new_readln() -> Identicon {
             println!("Enter input:");
-            let input: String = text_io::read!();
-            let identicon: Identicon = Identicon::new(input);
+            let identicon: Identicon = Identicon::new(text_io::read!());
             identicon
         }
 
@@ -128,11 +127,8 @@ pub mod Identicon {
                 i=i+1;
             }
 
-            //Resize image to be larger
-            let resized = image::imageops::resize(&imgbuf, 128, 128, image::imageops::FilterType::Nearest);
-
-            //Save the  resized image
-            resized.save(format!("{}.png", fileName)).unwrap();
+            //Resize and save the identicon.
+            image::imageops::resize(&imgbuf, 128, 128, image::imageops::FilterType::Nearest).save(format!("{}.png", fileName)).unwrap();
         }
     }
 }
